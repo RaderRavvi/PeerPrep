@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "200565662739",
+    "project_id": "peerprep-868cb",
+    "storage_bucket": "peerprep-868cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200565662739:android:70c99c3b8a90b9feea8be6",
+        "android_client_info": {
+          "package_name": "com.example.peerprep2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDtBUK2VlF-b8J5rz9Btzu9JbsnM6ldqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
