@@ -1,6 +1,6 @@
-# peerprep2
+# PeerPrep
 
-A new Flutter project.
+An education app
 
 ## Getting Started
 
