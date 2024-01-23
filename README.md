@@ -1,18 +1,11 @@
 # PeerPrep
 
-An education app
+PeerPrep is a flutter app for sharing school-related questions and receiving answers from people of your same school 
 
-## Getting Started
+The app has four main screens:
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-"# PeerPrep" 
-"# PeerPrep" 
+- *the home screen*, where you can see answers from people of your school
+- *the search screen*, where you can find specific questions/answers
+- *the upload screen*, where you can write and post a question
+- *the saved screen*, where you can see all the posts you saved
+- *the profile screen*, where you can manage your profile
