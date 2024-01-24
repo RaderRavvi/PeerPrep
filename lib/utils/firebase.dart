@@ -8,3 +8,6 @@ FirebaseStorage storage = FirebaseStorage.instance;
 
 // Collection refs
 CollectionReference usersRef = firestore.collection('utenti');
+
+// Utente attuale
+User currentUser = FirebaseAuth.instance.currentUser!;

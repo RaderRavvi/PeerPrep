@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:peerprep2/screens/auth/login_page.dart';
+import 'package:peerprep2/utils/utils.dart';
 import 'package:peerprep2/widgets/wall_post.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,8 +13,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final currentUser = FirebaseAuth.instance.currentUser!;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,10 +38,11 @@ class _HomePageState extends State<HomePage> {
             Expanded (
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
-                          .collection('User Posts')
+                          .collection('users')
+                          .doc(Utils.currentUid())
+                          .collection('posts')
                           .orderBy(
-                            'UserEmail',
-                            descending: false,
+                            'TimeStamp'
                           ).snapshots(),
                 builder: (context, snapshot) {
                   if(snapshot.hasData) {
@@ -53,7 +53,8 @@ class _HomePageState extends State<HomePage> {
                         return WallPost(
                           message: post['Message'],
                           user: post['UserEmail'],
-                          //time: post[],
+                          postId: post.id,
+                          likes: List<String>.from(post['Likes'] ?? []),
                         );
                       })
                     );
