@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:peerprep2/services/profile_service.dart';
+import 'package:peerprep2/utils/firebase.dart';
+import 'package:peerprep2/widgets/profile/profile_textbox.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -14,34 +18,78 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: Colors.grey [300],
       appBar: AppBar(
-        title: const Text('Profilo'),
+        titleTextStyle: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+          
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Profilo',
+            ),
+          ],
+        ),
         backgroundColor: Colors.deepPurple,
       ),
-      body: ListView(
-        children: const [
-          // Immagine profilo
-          /* ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: CachedNetworkImage (
-              width: width ?? 120,
-              height: width ?? 120,
-              imageUrl: firestore.collection('users').doc(Utils.currentUid()).snapshots().,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => const LoadingWheel(),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+      body: StreamBuilder<DocumentSnapshot>(
+        stream: stream,
+        builder: (context, snapshot) {
+          if(snapshot.hasData) {
+            final userData = snapshot.data!.data() as Map<String, dynamic>;
+
+            return ListView(
+              children: [
+                const SizedBox(height: 50),
+                // Foto profilo
+                const Icon(
+                  Icons.person,
+                  size: 72,
+                ),
+                const SizedBox(height: 10),
+
+                // email dell'utente
+                Text(
+                  currentUser.email!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.grey[700]),
+                ),
+                const SizedBox(height: 50),
+
+                //user details
+                Padding(
+                  padding: const EdgeInsets.only(left: 25),
+                  child: Text(
+                    'Le mie informazioni',
+                    style: TextStyle(color: Colors.grey[600]),
+                  ),
+                ),
+
+                // username
+                ProfileTextBox(
+                  text: userData['username'],
+                  sectionName: 'Nome utente',
+                  onPressed: () => ProfileService().editField('username', context),
+                ),
+
+                // bio
+                //TODO bio 
+                
+                // post dell'utente
+                //TODO post utente
+              ],
+            );
+          } else if(snapshot.hasError) {
+            return Center(
+              child: Text('Errore: ${snapshot.error}'),
+            );
+          }
+
+          return const Center(child: CircularProgressIndicator(),);
+        }
       )
-    ); */
-          // email dell'utente
-
-          //user details
-
-          // username
-
-          // bio
-
-          // post dell'utente
-        ],
-      ),
     );
   }
 }
