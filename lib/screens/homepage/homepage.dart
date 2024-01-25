@@ -18,7 +18,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: const Text('PeerPrep'),
+        title: Text(
+          'PeerPrep'
+        ),
+        titleTextStyle: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
         backgroundColor: Colors.deepPurple,
         actions: [
           IconButton(
