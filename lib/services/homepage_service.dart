@@ -61,4 +61,53 @@ class HomePageService {
 
     return formattedData;
   }
+
+  // cancella un post
+  void deletePost(BuildContext context, String postId) {
+    showDialog(
+      context: context, 
+      builder: (context) => AlertDialog(
+        title: const Text('Cancella il post'),
+        content: const Text('Sei sicuro di voler eliminare il post?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context), 
+            child: const Text('Annulla'),
+          ),
+          TextButton(
+            onPressed: () async {
+              // Cancella prima tutti i commenti di un post
+              final commentDocs = await usersRef
+                  .doc(Utils.currentUid())
+                  .collection('posts')
+                  .doc(postId)
+                  .collection('comments')
+                  .get();
+
+              for(var doc in commentDocs.docs)  {
+                await usersRef
+                  .doc(Utils.currentUid())
+                  .collection('posts')
+                  .doc(postId)
+                  .collection('comments')
+                  .doc(doc.id)
+                  .delete();
+              }
+
+              // Cancella il post
+              usersRef.doc(Utils.currentUid())
+                  .collection('posts')
+                  .doc(postId)
+                  .delete()
+                  .then((value) => print('post cancellato'))
+                  .catchError((error) => print('Impossibile cancellare il post: $error'));
+
+              if (context.mounted) Navigator.of(context).pop();
+            }, 
+            child: const Text('Elimina'),
+          ),
+        ],
+      )
+    );
+  }
 }

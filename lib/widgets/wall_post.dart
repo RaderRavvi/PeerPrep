@@ -5,6 +5,7 @@ import 'package:peerprep2/services/homepage_service.dart';
 import 'package:peerprep2/utils/firebase.dart';
 import 'package:peerprep2/utils/utils.dart';
 import 'package:peerprep2/widgets/buttons/comment_button.dart';
+import 'package:peerprep2/widgets/buttons/delete_button.dart';
 import 'package:peerprep2/widgets/buttons/like_button.dart';
 import 'package:peerprep2/widgets/comment.dart';
 
@@ -68,16 +69,29 @@ class _WallPostState extends State<WallPost> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Post
-          Column(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Messaggio
-              Text(widget.message),
+              // Gruppo di testo (messaggio + username)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Messaggio
+                  Text(widget.message),
+              
+                  // Utente
+                  Text(
+                    widget.user,
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
 
-              // Utente
-              Text(
-                widget.user,
-                style: const TextStyle(color: Colors.grey),
+              // Pulsante per eliminare il post
+              if(widget.user == currentUser.email)
+              DeleteButton(
+                onTap: () => HomePageService().deletePost(context, widget.postId)
               ),
             ],
           ),

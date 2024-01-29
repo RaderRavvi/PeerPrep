@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'PeerPrep'
         ),
         titleTextStyle: const TextStyle(
@@ -49,7 +49,8 @@ class _HomePageState extends State<HomePage> {
                           .doc(Utils.currentUid())
                           .collection('posts')
                           .orderBy(
-                            'TimeStamp'
+                            'TimeStamp',
+                            descending: true,
                           ).snapshots(),
                 builder: (context, snapshot) {
                   if(snapshot.hasData) {
