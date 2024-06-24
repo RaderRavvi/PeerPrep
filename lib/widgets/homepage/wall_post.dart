@@ -3,11 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:peerprep2/services/homepage_service.dart';
 import 'package:peerprep2/utils/firebase.dart';
-import 'package:peerprep2/utils/utils.dart';
 import 'package:peerprep2/widgets/buttons/comment_button.dart';
 import 'package:peerprep2/widgets/buttons/delete_button.dart';
 import 'package:peerprep2/widgets/buttons/like_button.dart';
-import 'package:peerprep2/widgets/comment.dart';
+import 'package:peerprep2/widgets/homepage/comment.dart';
 
 class WallPost extends StatefulWidget {
   final String message;
@@ -41,7 +40,7 @@ class _WallPostState extends State<WallPost> {
       isLiked = !isLiked;
     });
 
-    DocumentReference postRef = firestore.collection('users').doc(Utils.currentUid()).collection('posts').doc(widget.postId);
+    DocumentReference postRef = firestore.collection('User Posts').doc(widget.postId);
 
     if(isLiked) {
       // Se al post viene messo like, aggiungi l'email dell'utente che ha messo like
@@ -144,10 +143,10 @@ class _WallPostState extends State<WallPost> {
 
           // Mostra i commenti sotto il post
           StreamBuilder<QuerySnapshot>(
-            stream: usersRef.doc(Utils.currentUid())
-                .collection('posts')
+            stream: FirebaseFirestore.instance
+                .collection('User Posts')
                 .doc(widget.postId)
-                .collection('comments')
+                .collection('Comments')
                 .orderBy('CommentTime', descending: true)
                 .snapshots(), 
             builder: ((context, snapshot) {
@@ -157,7 +156,7 @@ class _WallPostState extends State<WallPost> {
                   child: CircularProgressIndicator(),
                 );
               }
-
+  
               return ListView(
                 shrinkWrap: true, // Utile per ListView annidate
                 physics: const NeverScrollableScrollPhysics(),

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:peerprep2/services/profile_service.dart';
 import 'package:peerprep2/utils/firebase.dart';
+import 'package:peerprep2/utils/utils.dart';
 import 'package:peerprep2/widgets/profile/profile_textbox.dart';
 
 
@@ -13,6 +13,11 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  // Modifica campo
+  Future<void> editField(String field) async {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: Colors.deepPurple,
       ),
       body: StreamBuilder<DocumentSnapshot>(
-        stream: stream,
+        stream: FirebaseFirestore.instance.collection('users').doc(Utils.currentUid()).snapshots(),
         builder: (context, snapshot) {
           if(snapshot.hasData) {
             final userData = snapshot.data!.data() as Map<String, dynamic>;
@@ -71,11 +76,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ProfileTextBox(
                   text: userData['username'],
                   sectionName: 'Nome utente',
-                  onPressed: () => ProfileService().editField('username', context),
+                  onPressed: () => editField('username'),
                 ),
 
                 // bio
-                //TODO bio 
+                ProfileTextBox(
+                  text: 'Empty bio',
+                  sectionName: 'Bio',
+                  onPressed: () => editField('username'),
+                ),
                 
                 // post dell'utente
                 //TODO post utente

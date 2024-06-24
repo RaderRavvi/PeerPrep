@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:peerprep2/screens/homepage/homepage.dart';
 import 'package:peerprep2/screens/profile/profile_screen.dart';
 import 'package:peerprep2/screens/saved_screen.dart';
-import 'package:peerprep2/screens/search_screen.dart';
+import 'package:peerprep2/screens/search/search_screen.dart';
 import 'package:peerprep2/screens/upload/upload_screen.dart';
 
 class PageCore extends StatefulWidget {
@@ -17,7 +17,7 @@ class _PageCoreState extends State<PageCore> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
-    const SearchScreen(),
+    const SearchPage(),
     const UploadScreen(),
     const SavedScreen(),
     const ProfileScreen(),

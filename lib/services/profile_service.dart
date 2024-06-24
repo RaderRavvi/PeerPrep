@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:peerprep2/utils/firebase.dart';
 import 'package:peerprep2/utils/utils.dart';
 
 class ProfileService {
+  get usersRef => null;
+
 
   Future<void> editField(String field, BuildContext context) async {
     String newValue = '';

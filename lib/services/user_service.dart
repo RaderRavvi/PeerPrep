@@ -16,12 +16,16 @@ class UserService {
     required username,
     required id,
     required photoUrl,
+    required school,
+    // required courseOfStudy,
   }) async {
     final user = UserModel(
         username: username.toString(),
         email: email.toString(),
         id: id,
-        photoUrl: Constants.userImageDefault
+        photoUrl: Constants.userImageDefault,
+        school: school,
+        // courseOfStudy: courseOfStudy,
     );
     await _collection.doc(user.id).set(user.toJson());
   }

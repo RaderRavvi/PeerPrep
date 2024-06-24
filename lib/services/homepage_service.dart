@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:peerprep2/utils/firebase.dart';
-import 'package:peerprep2/utils/utils.dart';
 
 class HomePageService {
 
   // Aggiungi un commento
   void addComment(String commentText, String postId) {
-    usersRef.doc(Utils.currentUid()).collection('posts').doc(postId).collection('comments').add({
+    FirebaseFirestore.instance.collection('User Posts').doc(postId).collection('Comments').add({
       'CommentText' : commentText,
       'CommentedBy' : currentUser.email,
       'CommentTime' : Timestamp.now(),
@@ -77,26 +76,24 @@ class HomePageService {
           TextButton(
             onPressed: () async {
               // Cancella prima tutti i commenti di un post
-              final commentDocs = await usersRef
-                  .doc(Utils.currentUid())
-                  .collection('posts')
+              final commentDocs = await FirebaseFirestore.instance
+                  .collection('User Posts')
                   .doc(postId)
-                  .collection('comments')
+                  .collection('Comments')
                   .get();
 
               for(var doc in commentDocs.docs)  {
-                await usersRef
-                  .doc(Utils.currentUid())
-                  .collection('posts')
+                await FirebaseFirestore.instance
+                  .collection('User Posts')
                   .doc(postId)
-                  .collection('comments')
+                  .collection('Comments')
                   .doc(doc.id)
                   .delete();
               }
 
               // Cancella il post
-              usersRef.doc(Utils.currentUid())
-                  .collection('posts')
+              FirebaseFirestore.instance
+                  .collection('User Posts')
                   .doc(postId)
                   .delete()
                   .then((value) => print('post cancellato'))

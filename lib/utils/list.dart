@@ -1,0 +1,1 @@
+List<String> ITI = ['Informatica', 'Elettronica', 'Meccanica', 'Chimica'];

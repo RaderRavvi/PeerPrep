@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:peerprep2/screens/auth/forgot_pw_page.dart';
-import 'package:peerprep2/screens/auth/register_page.dart';
+import 'package:peerprep2/screens/auth/register%20pages/welcome_signup.dart';
 import 'package:peerprep2/screens/page_core.dart';
 import 'package:peerprep2/utils/utils.dart';
 import 'package:peerprep2/widgets/loading_wheel.dart';
@@ -206,7 +206,7 @@ class _LoginPageState extends State<LoginPage> {
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                builder: (context) => const RegisterPage(),
+                                builder: (context) => const WelcomeSignUp(),
                               ));
                             },
                             child: const Text(

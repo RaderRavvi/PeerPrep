@@ -2,8 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:peerprep2/screens/auth/login_page.dart';
-import 'package:peerprep2/utils/utils.dart';
-import 'package:peerprep2/widgets/wall_post.dart';
+import 'package:peerprep2/widgets/homepage/wall_post.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -45,9 +44,7 @@ class _HomePageState extends State<HomePage> {
             Expanded (
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(Utils.currentUid())
-                          .collection('posts')
+                          .collection('User Posts')
                           .orderBy(
                             'TimeStamp',
                             descending: true,

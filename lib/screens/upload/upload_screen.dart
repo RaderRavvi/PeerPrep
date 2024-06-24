@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:peerprep2/utils/firebase.dart';
-import 'package:peerprep2/utils/utils.dart';
 
 class UploadScreen extends StatefulWidget {
   const UploadScreen({super.key});
@@ -17,9 +16,8 @@ class _UploadScreenState extends State<UploadScreen> {
     // Posta qualcosa solo se c'è qualcosa nel textfield
     if(_textController.text.isNotEmpty) {
       // Aggiungi i dati a firebase
-      firestore.collection('users')
-      .doc(Utils.currentUid())
-      .collection('posts').add({
+      firestore.collection('User Posts')
+      .add({
         'UserEmail': currentUser.email,
         'Message': _textController.text,
         'TimeStamp': Timestamp.now(),
